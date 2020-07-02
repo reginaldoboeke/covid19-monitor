@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
+import { faSearch, faRedo } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-searchbar',
   templateUrl: './app-searchbar.component.html',
   styleUrls: ['./app-searchbar.component.scss']
 })
 export class AppSearchbarComponent implements OnInit {
+
+  faSearch = faSearch;
+  faRedo = faRedo;
 
   searchForm: FormGroup;
 
@@ -30,5 +35,4 @@ export class AppSearchbarComponent implements OnInit {
 
     console.log('form submited', this.searchForm.getRawValue());
   }
-
 }
