@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="search-box">
+    <form [formGroup]="searchForm" (submit)="handleSubmitSearchForm()">
+      <label for="date">Data: </label>
+      <input type="date" id="date" name="date" formControlName="date">
+      <button type="submit">Buscar</button>
+    </form>
+
+    <button type="button">Atualizar</button>
+  </div>
+</div>
