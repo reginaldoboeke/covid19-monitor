@@ -3,7 +3,6 @@ header {
   justify-content: center;
 
   width: 100vw;
-  height: 190px;
   padding: 20px;
   background: #2C1D7C;
 
@@ -13,52 +12,6 @@ header {
       font-size: 22px;
       font-weight: 600;
       color: #fff;
-    }
-
-    div.list-cards {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-
-      padding: 0 20px;
-      margin-top: 40px;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      div.card {
-        display: flex;
-        flex: 0 0 auto;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        width: 297px;
-        height: 136px;
-        border-radius: 10px;
-
-        background: #FFFFFF;
-        box-shadow: 2px 4px 6px rgba(204, 204, 204, 0.25);
-
-        h4 {
-          color: #969CB2;
-          font-size: 20px;
-          line-height: 30px;
-          font-weight: 400;
-        }
-
-        h6 {
-          font-weight: 500;
-          font-size: 36px;
-          line-height: 54px;
-        }
-
-        & + div.card {
-          margin-left: 10px;
-        }
-      }
     }
 
     @media (max-width: 540px) {
