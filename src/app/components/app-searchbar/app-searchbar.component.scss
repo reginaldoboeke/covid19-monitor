@@ -1,5 +1,5 @@
 div.search-box {
-  margin-top: 65px;
+  margin-top: 25px;
 
   display: flex;
   justify-content: space-between;
@@ -44,6 +44,12 @@ div.search-box {
       font-size: 15px;
       font-weight: 400;
       color: #fff;
+
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.03);
+      }
     }
   }
 
@@ -58,6 +64,12 @@ div.search-box {
     font-size: 15px;
     font-weight: 400;
     color: #2C1D7C;
+
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.03);
+    }
 
     span { margin-left: 5px }
   }

@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let country of countries">
+      <tr *ngFor="let country of countries" (click)="handleGoToDetails(country)">
         <td>{{country.Country}}</td>
         <td>{{country.TotalConfirmed}}</td>
         <td>{{country.TotalRecovered}}</td>
