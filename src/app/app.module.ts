@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChartsModule } from 'ng2-charts';
 
 import { HomePage } from './pages/home/home.page';
 import { DetailsPage } from './pages/details/details.page';
@@ -27,6 +28,7 @@ import { AppSearchbarComponent } from './components/app-searchbar/app-searchbar.
     AppRoutingModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    ChartsModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

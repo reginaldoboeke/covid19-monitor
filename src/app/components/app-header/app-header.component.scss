@@ -7,11 +7,21 @@ header {
   background: #2C1D7C;
 
   div.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
     h1 {
       margin-left: 20px;
       font-size: 22px;
       font-weight: 600;
       color: #fff;
+    }
+
+    a {
+      cursor: pointer;
+
+      &:hover { text-decoration: underline }
     }
 
     @media (max-width: 540px) {

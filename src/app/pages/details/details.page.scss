@@ -1,0 +1,42 @@
+div.card {
+  margin-top: 45px;
+
+  display: flex;
+
+  width: 100%;
+  min-height: 415px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  box-shadow: 2px 4px 6px rgba(204, 204, 204, 0.25);
+
+  div.chart-box {
+    flex: 1;
+  }
+
+  div.details-box {
+    flex: 1;
+    padding: 30px 20px 20px 40px;
+
+    h1 {
+      margin: 30px 0 25px 0;
+      font-size: 22px;
+      font-weight: 600;
+      color: #363F5F;
+    }
+
+    h4 {
+      margin-bottom: 14px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #969CB2;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  div.card {
+    flex-direction: column;
+
+    margin-top: 20px;
+  }
+}

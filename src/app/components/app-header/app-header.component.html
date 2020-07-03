@@ -1,5 +1,7 @@
 <header [style.height]="height+'px'">
   <div class="container">
     <h1>Covid-19 Monitor</h1>
+
+    <a *ngIf="showGoBackButton" (click)="handleGoBack()">Voltar</a>
   </div>
 </header>

@@ -14,7 +14,9 @@ interface Country {
   styleUrls: ['./home.page.scss']
 })
 export class HomePage {
-  title = 'freterapido-challenge';
+  confirmedColor = '#F54E70';
+  recoveredColor = '#6FD408';
+  deathsColor = '#9476FF';
 
   countries: Country[];
 

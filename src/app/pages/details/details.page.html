@@ -1,1 +1,20 @@
-<p>detail-page works!</p>
+<app-header [showGoBackButton]="true"></app-header>
+
+<div class="container">
+  <div class="card">
+    <div class="chart-box">
+      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+      </canvas>
+    </div>
+
+    <div class="details-box">
+      <app-searchbar (submitFn)="handleGetData($event)" (refreshFn)="handleRefresh()"></app-searchbar>
+
+      <h1>Brasil</h1>
+      <h4>Total de infectados: <strong>123.874</strong></h4>
+      <h4>Total de curados: <strong>23.874</strong></h4>
+      <h4>Total de mortes: <strong>2.874</strong></h4>
+    </div>
+  </div>
+</div>

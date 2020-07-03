@@ -1,16 +1,14 @@
-<div class="container">
-  <div class="search-box">
-    <form [formGroup]="searchForm" (submit)="handleSubmitSearchForm()">
-      <label for="date" class="label-description">Data: </label>
-      <input type="date" id="date" name="date" formControlName="date">
-      <button type="submit">
-        <fa-icon [icon]="faSearch"></fa-icon>
-      </button>
-    </form>
-
-    <button type="button">
-      <fa-icon [icon]="faRedo"></fa-icon>
-      <span class="button-title">Atualizar</span>
+<div class="search-box">
+  <form [formGroup]="searchForm" (submit)="handleSubmitSearchForm()">
+    <label for="date" class="label-description">Data: </label>
+    <input type="date" id="date" name="date" formControlName="date">
+    <button type="submit">
+      <fa-icon [icon]="faSearch"></fa-icon>
     </button>
-  </div>
+  </form>
+
+  <button type="button" (click)="handleRefresh()">
+    <fa-icon [icon]="faRedo"></fa-icon>
+    <span class="button-title">Atualizar</span>
+  </button>
 </div>
