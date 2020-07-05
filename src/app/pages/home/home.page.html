@@ -3,21 +3,21 @@
 <div class="container list-cards">
   <div class="card" [style.color]="confirmedColor">
     <h4>Infectados</h4>
-    <h6>272,314</h6>
+    <h6>{{globalStatistics?.TotalConfirmed || 0 | number}}</h6>
   </div>
   <div class="card" [style.color]="recoveredColor">
     <h4>Curados</h4>
-    <h6>91,316</h6>
+    <h6>{{globalStatistics?.TotalRecovered || 0 | number}}</h6>
   </div>
   <div class="card" [style.color]="deathsColor">
     <h4>Óbitos</h4>
-    <h6>11,205</h6>
+    <h6>{{globalStatistics?.TotalDeaths || 0 | number}}</h6>
   </div>
 </div>
 
-
 <div class="container">
-  <app-searchbar></app-searchbar>
+  <app-searchbar (submitFn)="getDataByDate($event)">
+  </app-searchbar>
 
   <table>
     <thead>
@@ -31,9 +31,9 @@
     <tbody>
       <tr *ngFor="let country of countries" (click)="handleGoToDetails(country)">
         <td>{{country.Country}}</td>
-        <td>{{country.TotalConfirmed}}</td>
-        <td>{{country.TotalRecovered}}</td>
-        <td>{{country.TotalDeaths}}</td>
+        <td>{{country.TotalConfirmed | number}}</td>
+        <td>{{country.TotalRecovered | number}}</td>
+        <td>{{country.TotalDeaths | number}}</td>
       </tr>
     </tbody>
   </table>

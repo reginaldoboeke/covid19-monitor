@@ -1,72 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-interface Country {
-  Country: string;
-  TotalConfirmed: number | string;
-  TotalRecovered: number | string;
-  TotalDeaths: number | string;
-}
+import { DataService } from 'src/app/services/data.service';
+
+import { CountryStatistics } from 'src/app/models/country.model';
+import { GlobalStatistics } from 'src/app/models/global.model';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
 })
-export class HomePage {
+export class HomePage implements OnInit {
   confirmedColor = '#F54E70';
   recoveredColor = '#6FD408';
   deathsColor = '#9476FF';
 
-  countries: Country[];
+  countriesFilter = [
+    'brazil', 'portugal', 'germany', 'italy', 'united-states',
+  ];
 
-  constructor(private router: Router) {
-    this.countries = [
-      {
-        Country: 'Brasil',
-        TotalConfirmed: 111453,
-        TotalRecovered: 34562,
-        TotalDeaths: 43532,
-      },
-      {
-        Country: 'Brasil',
-        TotalConfirmed: 111453,
-        TotalRecovered: 34562,
-        TotalDeaths: 43532,
-      },
-      {
-        Country: 'Brasil',
-        TotalConfirmed: 111453,
-        TotalRecovered: 34562,
-        TotalDeaths: 43532,
-      },
-      {
-        Country: 'Brasil',
-        TotalConfirmed: 111453,
-        TotalRecovered: 34562,
-        TotalDeaths: 43532,
-      },
-      {
-        Country: 'Brasil',
-        TotalConfirmed: 111453,
-        TotalRecovered: 34562,
-        TotalDeaths: 43532,
-      },
-    ];
+  countries: CountryStatistics[];
+  globalStatistics: GlobalStatistics;
 
-    this.countries = this.countries.map(country => ({
-      ...country,
-      TotalConfirmed: country.TotalConfirmed.toLocaleString(),
-      TotalRecovered: country.TotalRecovered.toLocaleString(),
-      TotalDeaths: country.TotalDeaths.toLocaleString(),
-    }));
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+  ) { }
+
+  ngOnInit(): void {
+    this.loadSummary();
   }
 
-  handleGoToDetails(country: Country) {
+  async loadSummary(): Promise<void> {
+    const summary = await this.dataService.getSummary();
+
+    this.globalStatistics = summary.Global;
+
+    this.countries = summary.Countries
+      .filter(country => this.countriesFilter.includes(country.Slug));
+  }
+
+  async getDataByDate(date: Date) {
+    console.log('date is: ', date);
+  }
+
+  handleGoToDetails(country: CountryStatistics): void {
     this.router.navigate(['/details'], {
-      queryParams: {
-        country: JSON.stringify(country)
-      },
+      queryParams: { country: JSON.stringify(country) }
     });
   }
 }
