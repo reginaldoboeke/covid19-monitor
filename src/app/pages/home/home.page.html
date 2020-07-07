@@ -42,8 +42,8 @@
 
   <div class="card" *ngFor="let country of countries" (click)="handleGoToDetails(country)">
     <h4>{{country.Country}}</h4>
-    <strong>{{country.Confirmed}} <span>Infectados</span></strong>
-    <strong>{{country.Recovered}} <span>Curados</span></strong>
-    <strong>{{country.Deaths}} <span>Óbitos</span></strong>
+    <strong>{{country.Confirmed | number}} <span>Infectados</span></strong>
+    <strong>{{country.Recovered | number}} <span>Curados</span></strong>
+    <strong>{{country.Deaths | number}} <span>Óbitos</span></strong>
   </div>
 </div>
