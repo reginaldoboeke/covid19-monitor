@@ -4,7 +4,7 @@ Projeto desenvolvido com o Framework Angular para monitoramento do Covid-19. Os 
 
 ## Servidor de Desenvolvimento
 
-Abra o terminal na raiz do projeto e execute `ng serve -o`, a aplicação será aberta em seu navegador padrão na url: `http://localhost:4200/` 
+Abra o terminal na raiz do projeto e execute `npm install` para instalar as dependências do projeto. Depois, execute `ng serve -o`, a aplicação será aberta em seu navegador padrão na url: `http://localhost:4200/` 
 
 ## Preview
 
