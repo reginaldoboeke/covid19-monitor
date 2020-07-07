@@ -5,6 +5,8 @@ import { DataService } from 'src/app/services/data.service';
 
 import { CountryStatistics } from 'src/app/models/country.model';
 import { GlobalStatistics } from 'src/app/models/global.model';
+import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home-page',
@@ -17,37 +19,87 @@ export class HomePage implements OnInit {
   deathsColor = '#9476FF';
 
   countriesFilter = [
-    'brazil', 'portugal', 'germany', 'italy', 'united-states',
+    { countrySlug: 'brazil', countryCode: 'BR' },
+    { countrySlug: 'portugal', countryCode: 'PT' },
+    { countrySlug: 'germany', countryCode: 'DE' },
+    { countrySlug: 'italy', countryCode: 'IT' },
+    { countrySlug: 'spain', countryCode: 'ES' },
   ];
 
-  countries: CountryStatistics[];
+  countries: CountryStatistics[] = [];
   globalStatistics: GlobalStatistics;
+  dateInUse: Date;
 
   constructor(
     private router: Router,
+    private datePipe: DatePipe,
+    private toastr: ToastrService,
     private dataService: DataService,
   ) { }
 
-  ngOnInit(): void {
-    this.loadSummary();
+  async ngOnInit(): Promise<void> {
+    const date = new Date();
+    const dateFormatted = this.datePipe.transform(date, 'yyyy-MM-dd');
+
+    this.globalStatistics = await this.dataService.getCurrentWorldStatistic();
+
+    this.getCountriesStatisticsByDate(dateFormatted, true);
   }
 
-  async loadSummary(): Promise<void> {
-    const summary = await this.dataService.getSummary();
+  async getCountriesStatisticsByDate(date: string, firstLoad?: boolean) {
+    const [year, month, day] = date.split('-').map(Number);
+    this.dateInUse = new Date(year, month - 1, day);
 
-    this.globalStatistics = summary.Global;
+    const fromDate = new Date(year, month - 1, day);
+    const toDate = new Date(year, month - 1, day + 1)
 
-    this.countries = summary.Countries
-      .filter(country => this.countriesFilter.includes(country.Slug));
-  }
+    fromDate.setUTCHours(0);
+    toDate.setUTCHours(0);
 
-  async getDataByDate(date: Date) {
-    console.log('date is: ', date);
+    const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+
+    if (date === currentDate) {
+      fromDate.setDate(fromDate.getDate() - 1);
+      toDate.setDate(toDate.getDate() - 1);
+    }
+
+    await Promise.all(this.countriesFilter.map(({ countrySlug }) =>
+      this.dataService.getCountryStatisticsByDate({
+        countrySlug,
+        fromDate,
+        toDate,
+      })
+        .then(([responseCountry]) => {
+          const countryIndex = this.countries.findIndex(
+            country => country.CountryCode === responseCountry.CountryCode
+          );
+
+          if (countryIndex >= 0) {
+            this.countries[countryIndex] = responseCountry;
+            return;
+          }
+
+          this.countries.push(responseCountry);
+        }),
+    ));
+
+    if (!firstLoad) this.toastr.success(null, 'Dados atualizados!');
   }
 
   handleGoToDetails(country: CountryStatistics): void {
+    const [{ countrySlug }] = this.countriesFilter.filter(
+      countryItem => countryItem.countryCode === country.CountryCode
+    );
+
     this.router.navigate(['/details'], {
-      queryParams: { country: JSON.stringify(country) }
+      queryParams: {
+        Country: country.Country,
+        Deaths: country.Deaths,
+        Confirmed: country.Confirmed,
+        Recovered: country.Recovered,
+        Date: this.dateInUse.toISOString(),
+        Slug: countrySlug,
+      },
     });
   }
 }
