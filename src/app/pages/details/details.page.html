@@ -9,12 +9,15 @@
     </div>
 
     <div class="details-box">
-      <app-searchbar (submitFn)="handleGetData($event)" (refreshFn)="handleRefresh()"></app-searchbar>
+      <app-searchbar [initialDate]="country.Date" (submitFn)="getCountryStatisticsByDate($event)"
+        (refreshFn)="getCountryStatisticsByDate($event)">
+      </app-searchbar>
 
-      <h1>Brasil</h1>
-      <h4>Total de infectados: <strong>123.874</strong></h4>
-      <h4>Total de curados: <strong>23.874</strong></h4>
-      <h4>Total de mortes: <strong>2.874</strong></h4>
+      <h1>{{country.Country}}</h1>
+
+      <h4>Total de infectados: <strong>{{country.Confirmed | number}}</strong></h4>
+      <h4>Total de curados: <strong>{{country.Recovered | number}}</strong></h4>
+      <h4>Total de mortes: <strong>{{country.Deaths | number}}</strong></h4>
     </div>
   </div>
 </div>
