@@ -7,7 +7,6 @@ Projeto desenvolvido com o Framework Angular para monitoramento do Covid-19. Os 
 Abra o terminal na raiz do projeto e execute `ng serve -o`, a aplicação será aberta em seu navegador padrão na url: `http://localhost:4200/` 
 
 ## Preview
-A demonstração da aplicação pode ser acessada [aqui](https://modest-albattani-190299.netlify.app/home).
 
 ![alt text](https://i.ibb.co/1QcNW94/Captura-de-Tela-2020-07-06-a-s-23-03-30.png)
 
