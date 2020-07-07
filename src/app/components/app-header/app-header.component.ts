@@ -15,7 +15,7 @@ export class AppHeaderComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  handleGoBack() {
+  handleGoBack(): void {
     this.location.back();
   }
 }
