@@ -3,21 +3,21 @@
 <div class="container">
   <div class="card">
     <div class="chart-box">
-      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-        [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+      <canvas baseChart [data]="this.pieChartData" [labels]="pieChartLabels" [chartType]="this.pieChartType"
+        [options]="this.pieChartOptions" [colors]="this.pieChartColors" [legend]="this.pieChartLegend">
       </canvas>
     </div>
 
     <div class="details-box">
-      <app-searchbar [initialDate]="country.Date" (submitFn)="getCountryStatisticsByDate($event)"
-        (refreshFn)="getCountryStatisticsByDate($event)">
+      <app-searchbar [initialDate]="this.country.Date" (submitFn)="this.getCountryStatisticsByDate($event)"
+        (refreshFn)="this.getCountryStatisticsByDate($event)">
       </app-searchbar>
 
-      <h1>{{country.Country}}</h1>
+      <h1>{{this.country.Country}}</h1>
 
-      <h4>Total de infectados: <strong>{{country.Confirmed | number}}</strong></h4>
-      <h4>Total de curados: <strong>{{country.Recovered | number}}</strong></h4>
-      <h4>Total de mortes: <strong>{{country.Deaths | number}}</strong></h4>
+      <h4>Total de infectados: <strong>{{this.country.Confirmed | number}}</strong></h4>
+      <h4>Total de curados: <strong>{{this.country.Recovered | number}}</strong></h4>
+      <h4>Total de mortes: <strong>{{this.country.Deaths | number}}</strong></h4>
     </div>
   </div>
 </div>
