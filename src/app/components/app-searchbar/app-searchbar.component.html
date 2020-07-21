@@ -1,6 +1,6 @@
 <div class="search-box">
   <form [formGroup]="this.searchForm" (submit)="this.handleSubmitSearchForm()">
-    <label for="date" class="label-description">Data: </label>
+    <label for="date" class="label-description">Date: </label>
     <input type="date" id="date" name="date" formControlName="date">
     <button type="submit">
       <fa-icon [icon]="this.faSearch"></fa-icon>
@@ -9,6 +9,6 @@
 
   <button type="button" (click)="this.handleSubmitSearchForm()">
     <fa-icon [icon]="this.faRedo"></fa-icon>
-    <span class="button-title">Atualizar</span>
+    <span class="button-title">Refresh</span>
   </button>
 </div>

@@ -83,7 +83,7 @@ export class HomePage implements OnInit {
         }),
     ));
 
-    if (!firstLoad) this.toastr.success(null, 'Dados atualizados!');
+    if (!firstLoad) this.toastr.success(null, 'Data has been updated!');
   }
 
   handleGoToDetails(country: CountryStatistics): void {

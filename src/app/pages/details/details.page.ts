@@ -39,7 +39,7 @@ export class DetailsPage implements OnInit {
     aspectRatio: 1.5,
   };
 
-  pieChartLabels: Label[] = ['Infectados', 'Curados', 'Mortes'];
+  pieChartLabels: Label[] = ['Confirmed', 'Recovered', 'Deaths'];
   pieChartData: number[] = [0, 0, 0];
   pieChartType: ChartType = 'pie';
   pieChartLegend = true;
@@ -108,7 +108,7 @@ export class DetailsPage implements OnInit {
       deaths: this.country.Deaths,
     });
 
-    this.toastr.success(null, 'Dados atualizados!');
+    this.toastr.success(null, 'Data has been updated!');
   }
 
   updateChartData({ confirmed, recovered, deaths }: UpdateChartData) {

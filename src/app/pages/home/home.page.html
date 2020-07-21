@@ -2,15 +2,15 @@
 
 <div class="container list-cards">
   <div class="card" [style.color]="this.confirmedColor">
-    <h4>Infectados</h4>
+    <h4>Confirmed</h4>
     <h6>{{this.globalStatistics?.TotalConfirmed || 0 | number}}</h6>
   </div>
   <div class="card" [style.color]="this.recoveredColor">
-    <h4>Curados</h4>
+    <h4>Recovered</h4>
     <h6>{{this.globalStatistics?.TotalRecovered || 0 | number}}</h6>
   </div>
   <div class="card" [style.color]="this.deathsColor">
-    <h4>Óbitos</h4>
+    <h4>Deaths</h4>
     <h6>{{this.globalStatistics?.TotalDeaths || 0 | number}}</h6>
   </div>
 </div>
@@ -22,10 +22,10 @@
   <table>
     <thead>
       <tr>
-        <th>País</th>
-        <th>Infectados</th>
-        <th>Curados</th>
-        <th>Óbitos</th>
+        <th>Country</th>
+        <th>Confirmed</th>
+        <th>Recovered</th>
+        <th>Deaths</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +38,7 @@
     </tbody>
   </table>
 
-  <h3 class="list-title">Listagem</h3>
+  <h3 class="list-title">Listing</h3>
 
   <div class="card" *ngFor="let country of this.countries" (click)="this.handleGoToDetails(country)">
     <h4>{{this.country.Country}}</h4>
