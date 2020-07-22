@@ -20,19 +20,19 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getSummary(): Promise<Summary> {
+  public getSummary(): Promise<Summary> {
     return this.http
       .get<Summary>(`${this.baseURL}/summary`)
       .toPromise();
   }
 
-  getCurrentWorldStatistic(): Promise<GlobalStatistics> {
+  public getCurrentWorldStatistic(): Promise<GlobalStatistics> {
     return this.http
       .get<GlobalStatistics>(`${this.baseURL}/world/total`)
       .toPromise();
   }
 
-  getCountryStatisticsByDate({
+  public getCountryStatisticsByDate({
     countrySlug,
     fromDate,
     toDate,

@@ -8,14 +8,14 @@ import { Location } from '@angular/common';
 })
 export class AppHeaderComponent implements OnInit {
 
-  @Input() height: number = 80;
-  @Input() showGoBackButton: boolean = false;
+  @Input() public height: number = 80;
+  @Input() public showGoBackButton: boolean = false;
 
   constructor(private location: Location) { }
 
-  ngOnInit(): void { }
+  public ngOnInit(): void { }
 
-  handleGoBack(): void {
+  public handleGoBack(): void {
     this.location.back();
   }
 }

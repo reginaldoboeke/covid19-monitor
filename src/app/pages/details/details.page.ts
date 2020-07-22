@@ -22,7 +22,7 @@ interface UpdateChartData {
 })
 export class DetailsPage implements OnInit {
 
-  pieChartOptions: ChartOptions = {
+  public pieChartOptions: ChartOptions = {
     responsive: true,
     legend: { position: 'top' },
     layout: {
@@ -39,13 +39,13 @@ export class DetailsPage implements OnInit {
     aspectRatio: 1.5,
   };
 
-  pieChartLabels: Label[] = ['Confirmed', 'Recovered', 'Deaths'];
-  pieChartData: number[] = [0, 0, 0];
-  pieChartType: ChartType = 'pie';
-  pieChartLegend = true;
-  pieChartColors = [{ backgroundColor: ['#F54E70', '#6FD408', '#9476FF'] }];
+  public pieChartLabels: Label[] = ['Confirmed', 'Recovered', 'Deaths'];
+  public pieChartData: number[] = [0, 0, 0];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartColors = [{ backgroundColor: ['#F54E70', '#6FD408', '#9476FF'] }];
 
-  country: CountryStatistics = {} as CountryStatistics;
+  public country: CountryStatistics = {} as CountryStatistics;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,7 +54,7 @@ export class DetailsPage implements OnInit {
     private dataService: DataService,
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const {
       Country,
       Confirmed,
@@ -78,7 +78,7 @@ export class DetailsPage implements OnInit {
     })
   }
 
-  async getCountryStatisticsByDate(date: string) {
+  public async getCountryStatisticsByDate(date: string) {
     const [year, month, day] = date.split('-').map(Number);
 
     const fromDate = new Date(year, month - 1, day);
@@ -111,7 +111,7 @@ export class DetailsPage implements OnInit {
     this.toastr.success(null, 'Data has been updated!');
   }
 
-  updateChartData({ confirmed, recovered, deaths }: UpdateChartData) {
+  public updateChartData({ confirmed, recovered, deaths }: UpdateChartData) {
     this.pieChartData = [confirmed, recovered, deaths];
   }
 }

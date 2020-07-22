@@ -12,15 +12,15 @@ import { faSearch, faRedo } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppSearchbarComponent implements OnInit {
 
-  @Input() initialDate?: Date;
+  @Input() public initialDate?: Date;
 
-  @Output() submitFn: EventEmitter<any> = new EventEmitter();
-  @Output() refreshFn: EventEmitter<any> = new EventEmitter();
+  @Output() public submitFn: EventEmitter<any> = new EventEmitter();
+  @Output() public refreshFn: EventEmitter<any> = new EventEmitter();
 
-  faSearch = faSearch;
-  faRedo = faRedo;
+  public faSearch = faSearch;
+  public faRedo = faRedo;
 
-  searchForm: FormGroup;
+  public searchForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
