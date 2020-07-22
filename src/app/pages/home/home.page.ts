@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 import { DataService } from 'src/app/services/data.service';
 
 import { CountryStatistics } from 'src/app/models/country.model';
 import { GlobalStatistics } from 'src/app/models/global.model';
-import { DatePipe } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
+
+import { DateUtils } from 'src/app/utils/date.utils';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss']
+  styleUrls: ['./home.page.scss'],
+  providers: [DateUtils],
 })
 export class HomePage implements OnInit {
 
@@ -34,6 +37,7 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private datePipe: DatePipe,
+    private dateUtils: DateUtils,
     private toastr: ToastrService,
     private dataService: DataService,
   ) { }
@@ -51,11 +55,7 @@ export class HomePage implements OnInit {
     const [year, month, day] = date.split('-').map(Number);
     this.dateInUse = new Date(year, month - 1, day);
 
-    const fromDate = new Date(year, month - 1, day);
-    const toDate = new Date(year, month - 1, day + 1)
-
-    fromDate.setUTCHours(0);
-    toDate.setUTCHours(0);
+    const { fromDate, toDate } = this.dateUtils.getDatePeriodByDate(date);
 
     const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
@@ -81,7 +81,8 @@ export class HomePage implements OnInit {
           }
 
           this.countries.push(responseCountry);
-        }),
+        })
+        .catch(console.error),
     ));
 
     if (!firstLoad) this.toastr.success(null, 'Data has been updated!');

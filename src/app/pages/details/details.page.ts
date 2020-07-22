@@ -8,6 +8,7 @@ import { Label } from 'ng2-charts';
 import { CountryStatistics } from 'src/app/models/country.model';
 import { DataService } from 'src/app/services/data.service';
 import { ToastrService } from 'ngx-toastr';
+import { DateUtils } from 'src/app/utils/date.utils';
 
 interface UpdateChartData {
   confirmed: number;
@@ -18,7 +19,8 @@ interface UpdateChartData {
 @Component({
   selector: 'app-details-page',
   templateUrl: './details.page.html',
-  styleUrls: ['./details.page.scss']
+  styleUrls: ['./details.page.scss'],
+  providers: [DateUtils],
 })
 export class DetailsPage implements OnInit {
 
@@ -50,6 +52,7 @@ export class DetailsPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private datePipe: DatePipe,
+    private dateUtils: DateUtils,
     private toastr: ToastrService,
     private dataService: DataService,
   ) { }
@@ -79,13 +82,7 @@ export class DetailsPage implements OnInit {
   }
 
   public async getCountryStatisticsByDate(date: string) {
-    const [year, month, day] = date.split('-').map(Number);
-
-    const fromDate = new Date(year, month - 1, day);
-    const toDate = new Date(year, month - 1, day + 1)
-
-    fromDate.setUTCHours(0);
-    toDate.setUTCHours(0);
+    const { fromDate, toDate } = this.dateUtils.getDatePeriodByDate(date);
 
     const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
