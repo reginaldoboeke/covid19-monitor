@@ -1,8 +1,8 @@
 div.list-cards {
   display: flex;
   justify-content: space-between;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  overflow: hidden;
 
   padding: 0 20px;
   margin-top: -90px;
@@ -21,6 +21,7 @@ div.list-cards {
 
     width: 290px;
     height: 135px;
+    margin-bottom: 10px;
     border-radius: 10px;
 
     background: #FFFFFF;
@@ -38,8 +39,6 @@ div.list-cards {
       font-size: 36px;
       line-height: 54px;
     }
-
-    & + div.card { margin-left: 10px }
   }
 }
 
@@ -104,8 +103,16 @@ div.card { display: none }
   .container { padding: 0 20px }
 }
 
+@media (max-width: 620px) {
+  div.list-cards {
+    div.card { width: 100% }
+  }
+}
+
 @media (max-width: 540px) {
   table { display: none }
+
+  div.list-cards { justify-content: center }
 
   h3.list-title {
     display: block;
