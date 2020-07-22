@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 import { faSearch, faRedo } from '@fortawesome/free-solid-svg-icons';
 
@@ -24,9 +25,10 @@ export class AppSearchbarComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
+    private toastr: ToastrService,
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const date = this.datePipe.transform(
       this.initialDate || new Date(), 'yyyy-MM-dd',
     );
@@ -42,10 +44,17 @@ export class AppSearchbarComponent implements OnInit {
     });
   }
 
-  handleSubmitSearchForm(): void {
-    if (this.searchForm.invalid) return;
+  public handleSubmitSearchForm(): void {
+    if (this.searchForm.invalid) {
+      this.toastr.error(null, 'Date is required.');
+      return;
+    }
 
     const { date } = this.searchForm.getRawValue()
     this.submitFn.emit(date);
+  }
+
+  public get date() {
+    return this.searchForm.get('date');
   }
 }

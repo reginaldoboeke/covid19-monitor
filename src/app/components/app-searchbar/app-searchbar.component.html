@@ -1,7 +1,8 @@
 <div class="search-box">
   <form [formGroup]="this.searchForm" (submit)="this.handleSubmitSearchForm()">
     <label for="date" class="label-description">Date: </label>
-    <input type="date" id="date" name="date" formControlName="date">
+    <input type="date" id="date" name="date" formControlName="date" [class.input-error]="this.date.invalid">
+
     <button type="submit">
       <fa-icon [icon]="this.faSearch"></fa-icon>
     </button>
