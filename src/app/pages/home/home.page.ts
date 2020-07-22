@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/services/data.service';
 
 import { CountryStatistics } from 'src/app/models/country.model';
-import { GlobalStatistics } from 'src/app/models/global.model';
+import { TotalStatistics } from 'src/app/models/global.model';
 
 import { DateUtils } from 'src/app/utils/date.utils';
 
@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
   public deathsColor = '#9476FF';
 
   public countries: CountryStatistics[] = [];
-  public globalStatistics: GlobalStatistics;
+  public totalStatistics: TotalStatistics = {} as TotalStatistics;
 
   constructor(
     private router: Router,
@@ -45,8 +45,6 @@ export class HomePage implements OnInit {
   public async ngOnInit(): Promise<void> {
     const date = new Date();
     const dateFormatted = this.datePipe.transform(date, 'yyyy-MM-dd');
-
-    this.globalStatistics = await this.dataService.getCurrentWorldStatistic();
 
     this.getCountriesStatisticsByDate(dateFormatted, true);
   }
@@ -85,6 +83,8 @@ export class HomePage implements OnInit {
         .catch(console.error),
     ));
 
+    this.calculateTotalStatistics();
+
     if (!firstLoad) this.toastr.success(null, 'Data has been updated!');
   }
 
@@ -103,5 +103,15 @@ export class HomePage implements OnInit {
         Slug: countrySlug,
       },
     });
+  }
+
+  private calculateTotalStatistics(): void {
+    const totalStatistics = this.countries.reduce((accumulator, country): TotalStatistics => ({
+      TotalConfirmed: (accumulator.TotalConfirmed || 0) + country.Confirmed,
+      TotalRecovered: (accumulator.TotalRecovered || 0) + country.Recovered,
+      TotalDeaths: (accumulator.TotalDeaths || 0) + country.Deaths,
+    }), {} as TotalStatistics);
+
+    this.totalStatistics = Object.assign(this.totalStatistics, totalStatistics);
   }
 }

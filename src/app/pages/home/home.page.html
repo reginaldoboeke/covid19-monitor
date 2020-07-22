@@ -3,15 +3,15 @@
 <div class="container list-cards">
   <div class="card" [style.color]="this.confirmedColor">
     <h4>Confirmed</h4>
-    <h6>{{this.globalStatistics?.TotalConfirmed || 0 | number}}</h6>
+    <h6>{{this.totalStatistics?.TotalConfirmed || 0 | number}}</h6>
   </div>
   <div class="card" [style.color]="this.recoveredColor">
     <h4>Recovered</h4>
-    <h6>{{this.globalStatistics?.TotalRecovered || 0 | number}}</h6>
+    <h6>{{this.totalStatistics?.TotalRecovered || 0 | number}}</h6>
   </div>
   <div class="card" [style.color]="this.deathsColor">
     <h4>Deaths</h4>
-    <h6>{{this.globalStatistics?.TotalDeaths || 0 | number}}</h6>
+    <h6>{{this.totalStatistics?.TotalDeaths || 0 | number}}</h6>
   </div>
 </div>
 

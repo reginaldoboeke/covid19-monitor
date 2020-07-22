@@ -1,8 +1,8 @@
-import { GlobalStatistics } from './global.model';
+import { TotalStatistics } from './global.model';
 import { CountryStatistics } from './country.model';
 
 export class Summary {
-  public Global: GlobalStatistics;
+  public Total: TotalStatistics;
   public Countries: CountryStatistics[];
   public Date: Date;
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Summary } from '../models/summary.model';
 import { CountryStatistics } from '../models/country.model';
-import { GlobalStatistics } from '../models/global.model';
+import { TotalStatistics } from '../models/global.model';
 
 interface GetCountryStatisticsByDateDTO {
   countrySlug: string;
@@ -26,9 +26,9 @@ export class DataService {
       .toPromise();
   }
 
-  public getCurrentWorldStatistic(): Promise<GlobalStatistics> {
+  public getCurrentWorldStatistic(): Promise<TotalStatistics> {
     return this.http
-      .get<GlobalStatistics>(`${this.baseURL}/world/total`)
+      .get<TotalStatistics>(`${this.baseURL}/world/total`)
       .toPromise();
   }
 
