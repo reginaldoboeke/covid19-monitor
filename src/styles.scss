@@ -29,3 +29,43 @@ button {
   width: 100vw;
   margin: 0 auto;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 6px;
+  // margin: 10px 0;
+
+  label {
+    font-size: 15px;
+    font-weight: 500;
+    margin-right: 10px;
+    color: #363F5F;
+  }
+
+  input, select {
+    height: 34px;
+    width: 100%;
+    margin-right: 8px;
+
+    border-radius: 5px;
+    padding: 0 12px;
+    background: #FFFFFF;
+    border: 0.3px solid #CCCCCC;
+
+    font-size: 15px;
+    font-weight: 400;
+    color: #969CB2;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.input-error { border-color: #b00020 }
+
+.mb-1 { margin-bottom: 10px }
