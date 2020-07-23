@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Summary } from '../models/summary.model';
-import { CountryStatistics } from '../models/country-statistics.model';
-import { TotalStatistics } from '../models/total-statistics.model';
-import { Country } from '../models/country.model';
+import { Summary } from 'src/app/core/models/summary.model';
+import { CountryStatistics } from 'src/app/core/models/country-statistics.model';
+import { TotalStatistics } from 'src/app/core/models/total-statistics.model';
+import { Country } from 'src/app/core/models/country.model';
 
 interface GetCountryStatisticsByDateDTO {
   countrySlug: string;

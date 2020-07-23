@@ -6,12 +6,12 @@ import { ToastrService } from 'ngx-toastr';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 
-import { CountryStatistics } from 'src/app/models/country-statistics.model';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/modules/main/services/data.service';
 
-import { DateUtils } from 'src/app/utils/date.utils';
-import { Observable } from 'rxjs';
-import { Country } from 'src/app/models/country.model';
+import { CountryStatistics } from 'src/app/core/models/country-statistics.model';
+import { Country } from 'src/app/core/models/country.model';
+
+import { DateUtils } from 'src/app/shared/utils/date.utils';
 
 interface UpdateChartData {
   confirmed: number;
@@ -61,8 +61,8 @@ export class DetailsPage implements OnInit {
     private dataService: DataService,
   ) { }
 
-  public async ngOnInit(): Promise<void> {
-    await this.getCountriesAndSortByName();
+  public ngOnInit(): void {
+    this.getCountriesAndSortByName();
 
     const {
       Country,
@@ -72,6 +72,8 @@ export class DetailsPage implements OnInit {
       Date,
       Slug,
     } = this.route.snapshot.queryParams;
+
+    console.log('Date', Date);
 
     this.country.Country = Country;
     this.country.Confirmed = Confirmed;

@@ -33,6 +33,8 @@ export class AppSearchbarComponent implements OnInit {
       this.initialDate || new Date(), 'yyyy-MM-dd',
     );
 
+    console.log('initial date', this.initialDate)
+
     const [year, month, day] = date.split('-').map(Number);
 
     const formattedDate = this.datePipe.transform(

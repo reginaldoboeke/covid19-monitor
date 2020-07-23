@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/modules/main/services/data.service';
 
-import { CountryStatistics } from 'src/app/models/country-statistics.model';
-import { TotalStatistics } from 'src/app/models/total-statistics.model';
+import { CountryStatistics } from 'src/app/core/models/country-statistics.model';
+import { TotalStatistics } from 'src/app/core/models/total-statistics.model';
 
-import { DateUtils } from 'src/app/utils/date.utils';
+import { DateUtils } from 'src/app/shared/utils/date.utils';
 
 @Component({
   selector: 'app-home-page',
@@ -98,7 +98,7 @@ export class HomePage implements OnInit {
       countryItem => countryItem.countryCode === country.CountryCode
     );
 
-    this.router.navigate(['/details'], {
+    this.router.navigate(['/main/details'], {
       queryParams: {
         Country: country.Country,
         Deaths: country.Deaths,
