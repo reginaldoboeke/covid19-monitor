@@ -58,6 +58,8 @@ button {
     font-weight: 400;
     color: #969CB2;
   }
+
+  .input-error { border-color: #b00020 }
 }
 
 .input-group {
@@ -65,7 +67,5 @@ button {
   flex-direction: row;
   align-items: flex-end;
 }
-
-.input-error { border-color: #b00020 }
 
 .mb-1 { margin-bottom: 10px }
