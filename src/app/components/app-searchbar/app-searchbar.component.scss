@@ -2,38 +2,12 @@ div.search-box {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
 
   width: 100%;
   height: 65px;
-  padding: 0 6px;
 
-  form {
-    display: inline-block;
-
-    label {
-      font-size: 15px;
-      font-weight: 500;
-      margin-right: 10px;
-      color: #363F5F;
-    }
-
-    input {
-      height: 34px;
-      margin-right: 8px;
-
-      border-radius: 5px;
-      padding: 0 12px;
-      background: #FFFFFF;
-      border: 0.3px solid #CCCCCC;
-
-      font-size: 15px;
-      font-weight: 400;
-      color: #969CB2;
-    }
-
-    .input-error { border-color: #b00020 }
-
+  form > div.form-group > div.input-group {
     button {
       height: 34px;
       width: 42px;
@@ -68,5 +42,5 @@ div.search-box {
 }
 
 @media (max-width: 540px) {
-  .button-title, .label-description { display: none }
+  .button-title { display: none }
 }

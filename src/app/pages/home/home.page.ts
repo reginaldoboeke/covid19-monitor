@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 
 import { DataService } from 'src/app/services/data.service';
 
-import { CountryStatistics } from 'src/app/models/country.model';
-import { TotalStatistics } from 'src/app/models/global.model';
+import { CountryStatistics } from 'src/app/models/country-statistics.model';
+import { TotalStatistics } from 'src/app/models/total-statistics.model';
 
 import { DateUtils } from 'src/app/utils/date.utils';
 
@@ -80,7 +80,12 @@ export class HomePage implements OnInit {
 
           this.countries.push(responseCountry);
         })
-        .catch(console.error),
+        .catch((error) => {
+          console.error(error);
+          this.toastr.error(
+            'Please refresh the page', 'Problems fetching country data',
+          );
+        }),
     ));
 
     this.calculateTotalStatistics();

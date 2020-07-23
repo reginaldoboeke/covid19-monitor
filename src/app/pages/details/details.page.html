@@ -9,6 +9,16 @@
     </div>
 
     <div class="details-box">
+      <div class="form-group">
+        <label for="countrySlug">Country</label>
+        <select name="countrySlug" id="countrySlug" [(ngModel)]="this.country.Slug">
+          <option [value]="null" disabled>Select a country</option>
+          <option *ngFor="let country of this.countries" [value]="country.Slug">
+            {{country.Country}}
+          </option>
+        </select>
+      </div>
+
       <app-searchbar [initialDate]="this.country.Date" (submitFn)="this.getCountryStatisticsByDate($event)"
         (refreshFn)="this.getCountryStatisticsByDate($event)">
       </app-searchbar>

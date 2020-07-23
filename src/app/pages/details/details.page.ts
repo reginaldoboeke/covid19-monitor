@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
+import { ToastrService } from 'ngx-toastr';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 
-import { CountryStatistics } from 'src/app/models/country.model';
+import { CountryStatistics } from 'src/app/models/country-statistics.model';
 import { DataService } from 'src/app/services/data.service';
-import { ToastrService } from 'ngx-toastr';
+
 import { DateUtils } from 'src/app/utils/date.utils';
+import { Observable } from 'rxjs';
+import { Country } from 'src/app/models/country.model';
 
 interface UpdateChartData {
   confirmed: number;
@@ -47,6 +50,7 @@ export class DetailsPage implements OnInit {
   public pieChartLegend = true;
   public pieChartColors = [{ backgroundColor: ['#F54E70', '#6FD408', '#9476FF'] }];
 
+  public countries: Country[] = [];
   public country: CountryStatistics = {} as CountryStatistics;
 
   constructor(
@@ -57,7 +61,9 @@ export class DetailsPage implements OnInit {
     private dataService: DataService,
   ) { }
 
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
+    await this.getCountriesAndSortByName();
+
     const {
       Country,
       Confirmed,
@@ -78,7 +84,15 @@ export class DetailsPage implements OnInit {
       confirmed: Number(Confirmed),
       recovered: Number(Recovered),
       deaths: Number(Deaths),
-    })
+    });
+  }
+
+  public async getCountriesAndSortByName(): Promise<void> {
+    const countries = await this.dataService.getCountries();
+
+    this.countries = countries.sort(
+      (countryA, countryB) => countryA.Slug.localeCompare(countryB.Slug),
+    );
   }
 
   public async getCountryStatisticsByDate(date: string) {
@@ -91,21 +105,34 @@ export class DetailsPage implements OnInit {
       toDate.setDate(toDate.getDate() - 1);
     }
 
-    const [responseCountry] = await this.dataService.getCountryStatisticsByDate({
-      countrySlug: this.country.Slug,
-      fromDate,
-      toDate,
-    });
+    try {
+      const [responseCountry] = await this.dataService.getCountryStatisticsByDate({
+        countrySlug: this.country.Slug,
+        fromDate,
+        toDate,
+      });
 
-    this.country = Object.assign(this.country, responseCountry);
+      if (!responseCountry) {
+        this.toastr.warning(
+          'Please choose another country.', 'Country data not available', {
+            timeOut: 4000,
+          },
+        );
+        return;
+      }
 
-    this.updateChartData({
-      confirmed: this.country.Confirmed,
-      recovered: this.country.Recovered,
-      deaths: this.country.Deaths,
-    });
+      this.country = Object.assign(this.country, responseCountry);
 
-    this.toastr.success(null, 'Data has been updated!');
+      this.updateChartData({
+        confirmed: this.country.Confirmed,
+        recovered: this.country.Recovered,
+        deaths: this.country.Deaths,
+      });
+
+      this.toastr.success(null, 'Data has been updated!');
+    } catch (error) {
+      this.toastr.error('Please try again', 'Internal server error');
+    }
   }
 
   public updateChartData({ confirmed, recovered, deaths }: UpdateChartData) {

@@ -1,11 +1,16 @@
 <div class="search-box">
   <form [formGroup]="this.searchForm" (submit)="this.handleSubmitSearchForm()">
-    <label for="date" class="label-description">Date: </label>
-    <input type="date" id="date" name="date" formControlName="date" [class.input-error]="this.date.invalid">
+    <div class="form-group">
+      <label for="date" class="label-description">Date </label>
 
-    <button type="submit">
-      <fa-icon [icon]="this.faSearch"></fa-icon>
-    </button>
+      <div class="input-group">
+        <input type="date" id="date" name="date" formControlName="date" [class.input-error]="this.date.invalid">
+
+        <button type="submit">
+          <fa-icon [icon]="this.faSearch"></fa-icon>
+        </button>
+      </div>
+    </div>
   </form>
 
   <button type="button" (click)="this.handleSubmitSearchForm()">
