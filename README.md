@@ -8,6 +8,6 @@ Abra o terminal na raiz do projeto e execute `npm install` para instalar as depe
 
 ## Preview
 
-![alt text](https://i.ibb.co/1QcNW94/Captura-de-Tela-2020-07-06-a-s-23-03-30.png)
+![alt text](https://i.ibb.co/PmTL0HR/Captura-de-Tela-2020-07-23-a-s-20-34-58.png)
 
-![alt text](https://i.ibb.co/qDQ652x/Captura-de-Tela-2020-07-06-a-s-23-03-17.png)
+![alt text](https://i.ibb.co/dPvGdGQ/Captura-de-Tela-2020-07-23-a-s-20-33-59.png)
