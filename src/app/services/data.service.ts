@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Summary } from '../models/summary.model';
-import { CountryStatistics } from '../models/country.model';
-import { TotalStatistics } from '../models/global.model';
+import { CountryStatistics } from '../models/country-statistics.model';
+import { TotalStatistics } from '../models/total-statistics.model';
+import { Country } from '../models/country.model';
 
 interface GetCountryStatisticsByDateDTO {
   countrySlug: string;
@@ -23,6 +24,12 @@ export class DataService {
   public getSummary(): Promise<Summary> {
     return this.http
       .get<Summary>(`${this.baseURL}/summary`)
+      .toPromise();
+  }
+
+  public getCountries(): Promise<Country[]> {
+    return this.http
+      .get<Country[]>(`${this.baseURL}/countries`)
       .toPromise();
   }
 
