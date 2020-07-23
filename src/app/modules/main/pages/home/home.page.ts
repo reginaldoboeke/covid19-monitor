@@ -110,6 +110,9 @@ export class HomePage implements OnInit {
     });
   }
 
+  /**
+   * Totaling the statistics present in the table
+   */
   private calculateTotalStatistics(): void {
     const totalStatistics = this.countries.reduce((accumulator, country): TotalStatistics => ({
       TotalConfirmed: (accumulator.TotalConfirmed || 0) + country.Confirmed,

@@ -73,8 +73,6 @@ export class DetailsPage implements OnInit {
       Slug,
     } = this.route.snapshot.queryParams;
 
-    console.log('Date', Date);
-
     this.country.Country = Country;
     this.country.Confirmed = Confirmed;
     this.country.Deaths = Deaths;
@@ -92,8 +90,9 @@ export class DetailsPage implements OnInit {
   public async getCountriesAndSortByName(): Promise<void> {
     const countries = await this.dataService.getCountries();
 
+    // Sorting countries by name
     this.countries = countries.sort(
-      (countryA, countryB) => countryA.Slug.localeCompare(countryB.Slug),
+      (countryA, countryB) => countryA.Country.localeCompare(countryB.Country),
     );
   }
 
